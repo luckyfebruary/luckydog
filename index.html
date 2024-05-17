@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王同学签收</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- 引入 Font Awesome 图标库的 CSS 文件 -->
+<style>
+  @keyframes wave {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	text-align: center;
+	padding: 100px;
+	position: relative; /* 让音乐图标相对于 body 定位 */
+	background-image: url(v20b0ab6c69b4a8f46bc07975376b170f1r.jpg);
+	background-repeat: no-repeat;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-position: center;
+	background-attachment: fixed;
+  }
+
+  .wave-text {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	padding: 50px;
+	animation: wave 2s infinite;
+  }
+
+  .apology {
+	color:#000;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+	opacity: 0;
+	animation: appear 5s forwards;
+	font-size: large;
+	font-family: Verdana, Geneva, sans-serif;
+  }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* 音乐图标样式 */
+  .music-icon {
+	position: absolute;
+	top: 650px;
+	right: auto;
+	color: #8b0000;
+	font-size: 24px;
+	animation: rotate 2s infinite linear;
+	cursor: pointer; /* 添加鼠标指针样式 */
+  }
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* 技术支持信息样式 */
+  .support-info {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 14px;
+	color: #000;
+  }
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<h1 class="wave-text">绝味鸭脖</h1>
+<div class="apology">
+  <p id="sentence1">我想对你说：</b>
+  <p id="sentence2" style="display: none;">我想对你说第一句废话。</p>
+  <p id="sentence3" style="display: none;">我想对你说第一句废话。</p>
+  <p id="sentence4" style="display: none;">我想对你说第一句废话。</p>
+  <p id="sentence5" style="display: none;">我想对你说第一句废话。</p>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="你的音乐文件.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<i class="fas fa-music music-icon" id="musicIcon"></i> <!-- 添加音乐图标 -->
+
+<div class="support-info">
+  技术支持：肖顺鑫
+</div>
+
+<script>
+  var music = document.getElementById('bgMusic');
+  var musicIcon = document.getElementById('musicIcon');
+
+  // 点击音乐图标时，切换音乐的播放状态
+  musicIcon.addEventListener('click', function() {
+    if (music.paused) {
+      music.play();
+      musicIcon.classList.add('playing');
+    } else {
+      music.pause();
+      musicIcon.classList.remove('playing');
+    }
+  });
+
+  // 获取标题元素
+  var title = document.querySelector('.wave-text');
+  // 获取标题的文本内容
+  var text = title.textContent;
+  // 清空标题的文本内容
+  title.textContent = '';
+  
+  // 遍历标题的文本内容，并逐字显示
+  for (var i = 0; i < text.length; i++) {
+    // 创建一个 span 元素来包裹每个字母
+    var span = document.createElement('span');
+    // 设置 span 元素的样式和内容
+    span.style.display = 'inline-block';
+    span.style.animationDelay = i * 0.1 + 's'; // 延迟时间逐渐增加，实现逐字显示效果
+    span.textContent = text[i];
+    // 将 span 元素添加到标题中
+    title.appendChild(span);
+  }
+
+  function showNextSentence(id) {
+    var sentence = document.getElementById(id);
+    sentence.style.display = 'block';
+  }
+
+  setTimeout(function() { showNextSentence('sentence2'); }, 1000); // 第一句话显示后延迟1秒显示第二句话
+  setTimeout(function() { showNextSentence('sentence3'); }, 2000); // 第二句话显示后延迟2秒显示第三句话
+  setTimeout(function() { showNextSentence('sentence4'); }, 3000); // 第三句话显示后延迟2秒显示第四句话
+  setTimeout(function() { showNextSentence('sentence5'); }, 4000); // 第四句话显示后延迟2秒显示第五句话
+</script>
+</body>
+</html>
